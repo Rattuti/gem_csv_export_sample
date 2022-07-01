@@ -4,6 +4,10 @@ class BooksController < ApplicationController
   # GET /books or /books.json
   def index
     @books = Book.all
+    respond_to do |format|
+      format.html
+      format.csv { send_data Book.generate_csv, filename: "books.csv" }
+    end
   end
 
   # GET /books/1 or /books/1.json
